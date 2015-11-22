@@ -19,7 +19,8 @@ import com.soni.messenger.model.Comment;
 @Consumes(value=MediaType.APPLICATION_JSON)
 public class CommentResource {
 
-/*CommentServiceImpl commentService = new CommentServiceImpl();
+/*
+ * CommentServiceImpl commentService = new CommentServiceImpl();
 	@GET
 	public List<Comment> getComments( @PathParam("messageId") long messageId){
 		return commentService.getComments(messageId);
