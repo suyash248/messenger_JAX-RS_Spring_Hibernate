@@ -25,6 +25,7 @@ public class CommentServiceImpl extends AbstractService implements CommentServic
 				+ " order by c.createdDate desc";
 		Session session = getCurrentSession();
 		Query query = session.createQuery(hql);
+		query.setParameter("messageId", messageId);
 		comments = getAll(query);
 		return comments;
 	}
@@ -36,6 +37,8 @@ public class CommentServiceImpl extends AbstractService implements CommentServic
 				+ " and msg.messageId=:messageId ";
 		Session session = getCurrentSession();
 		Query query = session.createQuery(hql);
+		query.setParameter("messageId", messageId);
+		query.setParameter("commentId", commentId);
 		Comment comment = getUniqueResult(query);
 		return comment;
 	}

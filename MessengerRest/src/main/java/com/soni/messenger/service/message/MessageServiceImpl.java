@@ -46,7 +46,7 @@ public class MessageServiceImpl extends AbstractService implements MessageServic
 	}
 	
 	public Message updateMessage(Message updatedMessage, int messageId) {
-		Message message = updateEntity(updatedMessage, messageId);
+		Message message = updateEntityByPK(updatedMessage, messageId);
 		return message;
 	}
 	

@@ -25,6 +25,7 @@ import com.soni.messenger.json.views.Views;
 import com.soni.messenger.model.Link;
 import com.soni.messenger.model.Message;
 import com.soni.messenger.service.message.MessageService;
+import com.soni.messenger.util.SpringUtil;
 
 @Path(value="/messages")
 @Produces(value={MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
@@ -89,7 +90,7 @@ public class MessageResource {
 	/************** Sub resource :- CommentResource ***************/
 	@Path(value="/{messageId}/comments")
 	public CommentResource getCommentResource() {
-		return new CommentResource();
+		return SpringUtil.getBean(CommentResource.class);
 	}
 	
 	/************** HATEOAS convenient methods **************/

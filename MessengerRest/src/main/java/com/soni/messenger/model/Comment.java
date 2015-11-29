@@ -11,6 +11,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.codehaus.jackson.map.annotate.JsonView;
+
+import com.soni.messenger.json.views.Views;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,12 +30,16 @@ public class Comment extends AuditableEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="COMMENT_ID")
+	@JsonView(Views.Public.class)
 	private Integer commentId;
 	
 	@Column(name="CONTENT")
+	@JsonView(Views.Public.class)
 	private String content;
+	
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="MESSAGE_ID")
+	@JsonView(Views.Internal.class)
 	private Message message;
 }

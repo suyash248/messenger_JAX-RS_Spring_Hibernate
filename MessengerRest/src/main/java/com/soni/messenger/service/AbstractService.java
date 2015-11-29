@@ -65,7 +65,7 @@ public class AbstractService {
 		return staleEntity;
 	}
 	
-	public <E> E updateEntity(E updatedEntity, Serializable pk) {
+	public <E> E updateEntityByPK(E updatedEntity, Serializable pk) {
 		Session session = getCurrentSession();
 		E staleEntity = (E) session.get(updatedEntity.getClass(), pk);
 		return updateEntity(updatedEntity, staleEntity);
