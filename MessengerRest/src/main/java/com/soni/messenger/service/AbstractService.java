@@ -3,6 +3,7 @@ package com.soni.messenger.service;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.List;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -43,10 +44,7 @@ public class AbstractService {
 		return entity;
 	}
 	
-	public <E> E updateEntity(E updatedEntity, Serializable pk) {
-		Session session = getCurrentSession();
-		E staleEntity = (E) session.get(updatedEntity.getClass(), pk);
-		
+	public <E> E updateEntity(E updatedEntity, E staleEntity) {
 		Field[] fields = updatedEntity.getClass().getDeclaredFields();
 
 		for(int i=0; i<fields.length; i++){
@@ -66,6 +64,18 @@ public class AbstractService {
 		session.update(staleEntity);
 		return staleEntity;
 	}
+	
+	public <E> E updateEntity(E updatedEntity, Serializable pk) {
+		Session session = getCurrentSession();
+		E staleEntity = (E) session.get(updatedEntity.getClass(), pk);
+		return updateEntity(updatedEntity, staleEntity);
+	}
+	
+	public <E> List<E> getAll(Query query) {
+		List<E> list = query.list();
+		return list;
+	}
+	
 }
 
 

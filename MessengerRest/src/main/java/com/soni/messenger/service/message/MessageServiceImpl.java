@@ -22,7 +22,7 @@ public class MessageServiceImpl extends AbstractService implements MessageServic
 				+ " order by msg.createdDate desc ";
 		Session session = getCurrentSession();
 		Query query = session.createQuery(hql);
-		List<Message> messages = query.list();
+		List<Message> messages = getAll(query);
 		return messages;
 	}
 	
@@ -71,7 +71,7 @@ public class MessageServiceImpl extends AbstractService implements MessageServic
 		Session session = getCurrentSession();
 		Query query = session.createQuery(hql);
 		query.setParameter("authorName", authorName.toLowerCase());
-		List<Message> msgs = query.list();
+		List<Message> msgs = getAll(query);
 		return msgs;
 	}
 	
@@ -87,7 +87,7 @@ public class MessageServiceImpl extends AbstractService implements MessageServic
 		Query query = session.createQuery(hql)
 				.setFirstResult(start-1)
 				.setMaxResults(size-1);
-		List<Message> msgs = query.list();
+		List<Message> msgs = getAll(query);
 		return msgs;
 	}
 }
